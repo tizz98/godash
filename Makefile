@@ -9,6 +9,7 @@ fmt: dep
 
 test: build
 		go test -cover -race -v ./...
+		go vet ./...
 
 migrate: build
 		./godash migrate up
