@@ -1,0 +1,6 @@
+Database:
+  Name: godash
+  User: dash
+  Password: 123
+  Host: localhost
+  Port: 5432
