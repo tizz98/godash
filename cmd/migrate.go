@@ -14,7 +14,7 @@ func init() {
 }
 
 var migrate = &cobra.Command{
-	Use:   "migrations",
+	Use:   "migrate",
 	Short: "Run migrations",
 	Long: `This program runs command on the db. Supported commands are:
   - up [target] - runs all available migrations by default or up to target one if argument is provided.
