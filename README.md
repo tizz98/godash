@@ -1,6 +1,8 @@
 # godash
 The [Open Dashboard Project](https://github.com/tizz98/opendash) rewritten in Golang!
 
+[![CircleCI](https://circleci.com/gh/tizz98/godash/tree/master.svg?style=svg)](https://circleci.com/gh/tizz98/godash/tree/master)
+
 ## Getting started
 
 ```bash
