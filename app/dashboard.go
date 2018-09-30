@@ -51,7 +51,12 @@ func (a *App) ValidateDashboard(input *models.Dashboard) (*models.Dashboard, err
 		dashboard.TimeUnit = a.String("12")
 	}
 
-	dashboard.Location = input.Location
+	if input.Location != nil {
+		dashboard.Location = input.Location
+	} else {
+		dashboard.Location = a.String("San Francisco, CA")
+	}
+
 	return dashboard, nil
 }
 
