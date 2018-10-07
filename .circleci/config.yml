@@ -8,4 +8,5 @@ jobs:
     - checkout
     - run: make test
     - run: make build
+    - run: cp config.example.yaml config.yaml
     - run: ./dash version
