@@ -24,7 +24,7 @@ var dbshell = &cobra.Command{
 
 		split := strings.Split(options.Addr, ":")
 
-		file, err := ioutil.TempFile("/tmp", "pgpass")
+		file, err := ioutil.TempFile("/tmp", ".pgpass.*.txt")
 		if err != nil {
 			log.Fatal(err)
 		}
