@@ -1,23 +1,21 @@
 package app
 
 import (
-	"context"
 	"github.com/go-pg/pg"
 	"github.com/tizz98/godash/db"
 )
 
 type App struct {
-	Context context.Context
+	Context *Context
 	Db      *pg.DB
 }
 
-func New() *App {
-	return &App{
-		Context: context.Background(),
-		Db:      db.Connect(),
-	}
+type Context struct {
+	App *App
 }
 
-func (a *App) String(s string) *string {
-	return &s
+func NewApp() *App {
+	app := &App{Db: db.Connect()}
+	app.Context = &Context{App: app}
+	return app
 }

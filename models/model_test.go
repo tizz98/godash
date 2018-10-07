@@ -8,12 +8,9 @@ import (
 func TestModel_GenerateId(t *testing.T) {
 	assert := assert.New(t)
 
-	m := &Model{}
-	id := m.GenerateId()
+	id := GenerateId()
+	assert.Len(id, 32)
 
-	assert.Equal(32, len(id))
-
-	id2 := m.GenerateId()
-
+	id2 := GenerateId()
 	assert.NotEqual(id, id2)
 }

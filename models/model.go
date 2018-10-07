@@ -23,7 +23,7 @@ const (
 
 // Generate a random id
 // from: https://stackoverflow.com/a/31832326
-func (m *Model) GenerateId() Id {
+func GenerateId() Id {
 	b := make([]byte, IdLength)
 	for i, cache, remain := IdLength-1, src.Int63(), letterIdxMax; i >= 0; {
 		if remain == 0 {

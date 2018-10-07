@@ -7,54 +7,54 @@ import (
 	"strings"
 )
 
-func (a *App) ValidateDashboard(input *models.Dashboard) (*models.Dashboard, error) {
+func (ctx *Context) ValidateDashboard(input *models.Dashboard) (*models.Dashboard, error) {
 	dashboard := &models.Dashboard{}
-	dashboard.Id = dashboard.GenerateId()
+	dashboard.Id = models.GenerateId()
 
-	if input.Background != nil {
+	if input.Background != "" {
 		if background, err := validateColor(input.Background); err == nil {
 			dashboard.Background = background
 		} else {
 			return nil, err
 		}
 	} else {
-		dashboard.Background = a.String("000dff")
+		dashboard.Background = "000dff"
 	}
 
-	if input.Foreground != nil {
+	if input.Foreground != "" {
 		if foreground, err := validateColor(input.Foreground); err == nil {
 			dashboard.Foreground = foreground
 		} else {
 			return nil, err
 		}
 	} else {
-		dashboard.Foreground = a.String("ffffff")
+		dashboard.Foreground = "ffffff"
 	}
 
-	if input.TemperatureUnit != nil {
+	if input.TemperatureUnit != "" {
 		if unit, err := validateTemperatureUnit(input.TemperatureUnit); err == nil {
 			dashboard.TemperatureUnit = unit
 		} else {
 			return nil, err
 		}
 	} else {
-		dashboard.TemperatureUnit = a.String("F")
+		dashboard.TemperatureUnit = "F"
 	}
 
-	if input.TimeUnit != nil {
+	if input.TimeUnit != "" {
 		if unit, err := validateTimeUnit(input.TimeUnit); err == nil {
 			dashboard.TimeUnit = unit
 		} else {
 			return nil, err
 		}
 	} else {
-		dashboard.TimeUnit = a.String("12")
+		dashboard.TimeUnit = "12"
 	}
 
-	if input.Location != nil {
+	if input.Location != "" {
 		dashboard.Location = input.Location
 	} else {
-		dashboard.Location = a.String("San Francisco, CA")
+		dashboard.Location = "San Francisco, CA"
 	}
 
 	return dashboard, nil
@@ -62,49 +62,48 @@ func (a *App) ValidateDashboard(input *models.Dashboard) (*models.Dashboard, err
 
 var validHexColor = regexp.MustCompile("[A-Fa-f0-9]{6}")
 
-func validateColor(color *string) (*string, error) {
-	if color == nil {
-		return nil, nil
+func validateColor(color string) (string, error) {
+	if color == "" {
+		return "", nil
 	}
-	trimmedColor := strings.TrimLeft(*color, "#")
+	trimmedColor := strings.TrimLeft(color, "#")
 
 	if len(trimmedColor) != 6 {
-		return nil, fmt.Errorf("color must be 6 characters long")
+		return "", fmt.Errorf("color must be 6 characters long")
 	}
 
 	if !validHexColor.MatchString(trimmedColor) {
-		return nil, fmt.Errorf("invalid hex code")
+		return "", fmt.Errorf("invalid hex code")
 	}
 
-	lowerColor := strings.ToLower(trimmedColor)
-	return &lowerColor, nil
+	return strings.ToLower(trimmedColor), nil
 }
 
-func validateTemperatureUnit(unit *string) (*string, error) {
-	if unit == nil {
-		return nil, nil
+func validateTemperatureUnit(unit string) (string, error) {
+	if unit == "" {
+		return "", nil
 	}
 
-	lowerUnit := strings.ToLower(*unit)
+	lowerUnit := strings.ToLower(unit)
 
 	switch lowerUnit {
 	case "f", "c":
 	default:
-		return nil, fmt.Errorf("temperature unit must be either 'f' or 'c'")
+		return "", fmt.Errorf("temperature unit must be either 'f' or 'c'")
 	}
 
-	return &lowerUnit, nil
+	return lowerUnit, nil
 }
 
-func validateTimeUnit(unit *string) (*string, error) {
-	if unit == nil {
-		return nil, nil
+func validateTimeUnit(unit string) (string, error) {
+	if unit == "" {
+		return "", nil
 	}
 
-	switch *unit {
+	switch unit {
 	case "12", "24":
 	default:
-		return nil, fmt.Errorf("time unit must be either '12' or '24'")
+		return "", fmt.Errorf("time unit must be either '12' or '24'")
 	}
 
 	return unit, nil

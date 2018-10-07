@@ -13,11 +13,11 @@ func init() {
 				id char(32) PRIMARY KEY,
 				stock_tickers text[],
 				widget_order text[],
-				background text,
-				foreground text,
-				temperature_unit text,
-				time_unit text,
-				location text
+				background text not null,
+				foreground text not null,
+				temperature_unit text not null,
+				time_unit text not null,
+				location text not null
 			)
 		`)
 		return err

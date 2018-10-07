@@ -9,73 +9,74 @@ import (
 
 func TestApp_ValidateDashboard(t *testing.T) {
 	assert := assert.New(t)
-	app := New()
+	app := NewApp()
+	ctx := app.Context
 
 	dash := &models.Dashboard{
-		Background:      app.String("#fff000"),
-		Foreground:      app.String("#ffffff"),
-		TemperatureUnit: app.String("C"),
-		TimeUnit:        app.String("12"),
-		Location:        app.String("123 Mary Ln"),
+		Background:      "#fff000",
+		Foreground:      "#ffffff",
+		TemperatureUnit: "C",
+		TimeUnit:        "12",
+		Location:        "123 Mary Ln",
 	}
 
-	_, err := app.ValidateDashboard(dash)
+	_, err := ctx.ValidateDashboard(dash)
 	assert.NoError(err)
 
 	dash = &models.Dashboard{
-		Background:      app.String("#fqf000"),
-		Foreground:      app.String("#ffffff"),
-		TemperatureUnit: app.String("C"),
-		TimeUnit:        app.String("12"),
-		Location:        app.String("123 Mary Ln"),
+		Background:      "#fqf000",
+		Foreground:      "#ffffff",
+		TemperatureUnit: "C",
+		TimeUnit:        "12",
+		Location:        "123 Mary Ln",
 	}
-	_, err = app.ValidateDashboard(dash)
+	_, err = ctx.ValidateDashboard(dash)
 	if assert.Error(err) {
 		assert.Equal(err, fmt.Errorf("invalid hex code"))
 	}
 
 	dash = &models.Dashboard{
-		Background:      app.String("#fff00"),
-		Foreground:      app.String("#ffffff"),
-		TemperatureUnit: app.String("C"),
-		TimeUnit:        app.String("12"),
-		Location:        app.String("123 Mary Ln"),
+		Background:      "#fff00",
+		Foreground:      "#ffffff",
+		TemperatureUnit: "C",
+		TimeUnit:        "12",
+		Location:        "123 Mary Ln",
 	}
-	_, err = app.ValidateDashboard(dash)
+	_, err = ctx.ValidateDashboard(dash)
 	if assert.Error(err) {
 		assert.Equal(err, fmt.Errorf("color must be 6 characters long"))
 	}
 
 	dash = &models.Dashboard{
-		Background:      app.String("#fff000"),
-		Foreground:      app.String("#ffffff"),
-		TemperatureUnit: app.String("q"),
-		TimeUnit:        app.String("12"),
-		Location:        app.String("123 Mary Ln"),
+		Background:      "#fff000",
+		Foreground:      "#ffffff",
+		TemperatureUnit: "q",
+		TimeUnit:        "12",
+		Location:        "123 Mary Ln",
 	}
-	_, err = app.ValidateDashboard(dash)
+	_, err = ctx.ValidateDashboard(dash)
 	if assert.Error(err) {
 		assert.Equal(err, fmt.Errorf("temperature unit must be either 'f' or 'c'"))
 	}
 
 	dash = &models.Dashboard{
-		Background:      app.String("#fff000"),
-		Foreground:      app.String("#ffffff"),
-		TemperatureUnit: app.String("F"),
-		TimeUnit:        app.String("13"),
-		Location:        app.String("123 Mary Ln"),
+		Background:      "#fff000",
+		Foreground:      "#ffffff",
+		TemperatureUnit: "F",
+		TimeUnit:        "13",
+		Location:        "123 Mary Ln",
 	}
-	_, err = app.ValidateDashboard(dash)
+	_, err = ctx.ValidateDashboard(dash)
 	if assert.Error(err) {
 		assert.Equal(err, fmt.Errorf("time unit must be either '12' or '24'"))
 	}
 
-	dash, err = app.ValidateDashboard(&models.Dashboard{})
+	dash, err = ctx.ValidateDashboard(&models.Dashboard{})
 	assert.NoError(err)
-	assert.NotNil(dash.Id)
-	assert.NotNil(dash.Background)
-	assert.NotNil(dash.Foreground)
-	assert.NotNil(dash.TemperatureUnit)
-	assert.NotNil(dash.TimeUnit)
-	assert.NotNil(dash.Location)
+	assert.NotEmpty(dash.Id)
+	assert.NotEmpty(dash.Background)
+	assert.NotEmpty(dash.Foreground)
+	assert.NotEmpty(dash.TemperatureUnit)
+	assert.NotEmpty(dash.TimeUnit)
+	assert.NotEmpty(dash.Location)
 }
