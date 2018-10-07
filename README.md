@@ -16,3 +16,13 @@ createdb godash --owner dash
 
 make migrate
 ```
+
+## Commands
+* `make build` creates the binary `dash`
+* `make fmt` formats the Go files
+* `make test` runs all tests
+* `make migrate` runs migrations
+* `make db-version` shows the current database version
+* `make migrate-down` resets the last migration
+* `make db-reset` resets the database
+* `./dash dbshell` connects to a PSQL shell

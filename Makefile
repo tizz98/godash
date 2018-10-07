@@ -2,7 +2,7 @@ dep:
 		dep ensure
 
 build: dep
-		go build .
+		go build -o dash .
 
 fmt: dep
 		go fmt ./...
