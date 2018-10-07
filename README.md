@@ -26,3 +26,4 @@ make migrate
 * `make migrate-down` resets the last migration
 * `make db-reset` resets the database
 * `./dash dbshell` connects to a PSQL shell
+* `./dash serve` starts the HTTP server on port `9090`
