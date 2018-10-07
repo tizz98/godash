@@ -2,11 +2,12 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/go-pg/migrations"
 	"github.com/spf13/cobra"
 	"github.com/tizz98/godash/db"
 	_ "github.com/tizz98/godash/db/migrations"
-	"os"
 )
 
 func init() {

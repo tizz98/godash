@@ -2,13 +2,14 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
-	"github.com/tizz98/godash/db"
 	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/spf13/cobra"
+	"github.com/tizz98/godash/db"
 )
 
 func init() {

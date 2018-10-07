@@ -2,9 +2,10 @@ package app
 
 import (
 	"fmt"
-	"github.com/tizz98/godash/models"
 	"regexp"
 	"strings"
+
+	"github.com/tizz98/godash/models"
 )
 
 func (ctx *Context) ValidateDashboard(input *models.Dashboard) (*models.Dashboard, error) {

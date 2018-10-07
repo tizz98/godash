@@ -2,12 +2,13 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+
 	"github.com/gorilla/mux"
 	"github.com/spf13/cobra"
 	"github.com/tizz98/godash/api"
 	"github.com/tizz98/godash/app"
-	"log"
-	"net/http"
 )
 
 var port int

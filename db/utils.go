@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+
 	"github.com/go-pg/pg"
 	"github.com/spf13/viper"
 )

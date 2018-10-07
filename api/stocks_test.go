@@ -1,11 +1,12 @@
 package api
 
 import (
-	"github.com/stretchr/testify/assert"
-	"github.com/tizz98/godash/app"
 	"io/ioutil"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/tizz98/godash/app"
 )
 
 func TestApi_SearchStocks(t *testing.T) {

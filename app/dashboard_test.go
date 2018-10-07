@@ -2,9 +2,10 @@ package app
 
 import (
 	"fmt"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/tizz98/godash/models"
-	"testing"
 )
 
 func TestApp_ValidateDashboard(t *testing.T) {

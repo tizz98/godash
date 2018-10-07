@@ -3,8 +3,9 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/tizz98/godash/app"
 	"net/http"
+
+	"github.com/tizz98/godash/app"
 )
 
 type Api struct {
